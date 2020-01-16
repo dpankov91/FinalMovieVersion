@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package gui.model;
-
+// Just a test
 import be.Category;
 import be.Movie;
 import bll.BllInterface;
