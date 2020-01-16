@@ -8,7 +8,7 @@
     <update check="always"/>
     <resources>
         <j2se version="9.0.4+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="Movies.jar" size="27448" download="eager"/>
+        <jar href="Movies.jar" size="27344" download="eager"/>
         <jar href="lib\mssql-jdbc-6.4.0.jre9.jar" size="1123080" download="eager"/>
     </resources>
     <jfx:javafx-desc width="800" height="600" main-class="movies.Movies" name="Movies"/>
