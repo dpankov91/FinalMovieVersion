@@ -66,6 +66,10 @@ public class Movie {
         
     }
 
+    public Movie(int ID, String name, List<Category> categories, Integer userRating, int imdbRating, String filePath, java.sql.Date lastView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getID() {
         return ID;
     }

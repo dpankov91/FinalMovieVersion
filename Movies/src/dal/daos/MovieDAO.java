@@ -35,31 +35,32 @@ public class MovieDAO {
         mcDao = new CatMovDAO();
     }
 
-    public Movie createMovie(int ID, String name, List<Category> categories, Integer userRating, int imdbRating, String filePath, LocalDate lastView) throws daoException {
-
+    public Movie createMovie(String name, List<Category> categories, Integer userRating, Integer imdbRating, String filePath, LocalDate lastView) throws daoException 
+    {
         String sqlStatement = "INSERT INTO Movie(name, userRating, imdbRating, filePath, lastView) VALUES (?,?,?,?,?)";
-        try ( Connection con = connector.getConnection();  PreparedStatement statement = con.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, ID);
-            statement.setString(2, name);
-            if (userRating == null) {
-                statement.setNull(3, Types.INTEGER);
-            } else {
-                statement.setInt(3, userRating);
+        try(Connection con = connector.getConnection();
+            PreparedStatement statement = con.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS))
+            
+            {
+            statement.setString(1, name);
+            if(userRating == null) {
+                statement.setNull(2, Types.INTEGER);
             }
-            statement.setInt(4, imdbRating);
-            statement.setString(5, filePath);
-            statement.setDate(6, Date.valueOf(lastView));
+            else {
+                statement.setInt(2, userRating);
+            }
+            statement.setInt(3, imdbRating);
+            statement.setString(4, filePath);
             statement.execute();
             ResultSet rs = statement.getGeneratedKeys();
             rs.next();
-
-            Movie movie = new Movie(ID, name, categories, userRating, imdbRating, filePath, lastView);
+            
+            Movie movie = new Movie(name, categories, userRating, imdbRating, filePath);
             mcDao.addCategoriesToMovie(categories, movie);
             return movie;
         } catch (SQLException ex) {
             throw new daoException("Cannot execute query");
-        }
-
+        }    
     }
 
     public List<Movie> getAllMovies() throws daoException {
@@ -138,32 +139,31 @@ public class MovieDAO {
         }    
     }
 
-    public Movie createMovie(String name, List<Category> categories, Integer userRating, Integer imdbRating, String filePath, LocalDate lastView) throws daoException 
-    {
+    public Movie createMovie(int ID, String name, List<Category> categories, Integer userRating, int imdbRating, String filePath, LocalDate lastView) throws daoException {
+
         String sqlStatement = "INSERT INTO Movie(name, userRating, imdbRating, filePath, lastView) VALUES (?,?,?,?,?)";
-        try(Connection con = connector.getConnection();
-            PreparedStatement statement = con.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS))
-            
-            {
-            statement.setString(1, name);
-            if(userRating == null) {
-                statement.setNull(2, Types.INTEGER);
+        try ( Connection con = connector.getConnection();  PreparedStatement statement = con.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, ID);
+            statement.setString(2, name);
+            if (userRating == null) {
+                statement.setNull(3, Types.INTEGER);
+            } else {
+                statement.setInt(3, userRating);
             }
-            else {
-                statement.setInt(2, userRating);
-            }
-            statement.setInt(3, imdbRating);
-            statement.setString(4, filePath);
+            statement.setInt(4, imdbRating);
+            statement.setString(5, filePath);
+            statement.setDate(6, Date.valueOf(lastView));
             statement.execute();
             ResultSet rs = statement.getGeneratedKeys();
             rs.next();
-            
-            Movie movie = new Movie(name, categories, userRating, imdbRating, filePath);
+
+            Movie movie = new Movie(ID, name, categories, userRating, imdbRating, filePath, lastView);
             mcDao.addCategoriesToMovie(categories, movie);
             return movie;
         } catch (SQLException ex) {
             throw new daoException("Cannot execute query");
-        }    
+        }
+
     }
 
     public Movie updateMovie(Movie movie, String name, List<Category> categories, Integer userRating, Integer imdbRating, String filePath) throws SQLException

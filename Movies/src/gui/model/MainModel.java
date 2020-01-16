@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package gui.model;
-// Just a test
+
 import be.Category;
 import be.Movie;
 import bll.BllInterface;
@@ -122,6 +122,15 @@ public class MainModel {
 
     public ObservableList<Movie> getCurrentMovies() throws ModelException {
         return allMovies;
+    }
+    
+        public ObservableList<Movie> search(List<Movie> listOfCurrentMovies , String toFind) throws ModelException {
+            //TODO
+        return null;
+        }
+
+    public void updateMovieRating(Movie movieToBeRated, int movieIndex, Integer selectedItem) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
  
