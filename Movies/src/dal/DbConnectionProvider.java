@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class DbConnectionProvider {
 
-    private static final String PROP_FILE = "data/databaseConnectionInfo.settings";
+    private static final String PROP_FILE = "data/databaseConnectionInfo.properties";
     private SQLServerDataSource ds;
 
     public DbConnectionProvider() {
